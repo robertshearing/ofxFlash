@@ -33,3 +33,11 @@ Removed dependencies on POCO events so its now optional.
 ofxFlash now working on the iPhone / iPad.
 - had to introduce touch mode as mouse and touch events behave differently. touch mode needs to be set to true on ios devices.
 - added ofxFlashLibraryLoader & ofxFlashLibraryLoaderIOS to ofxFlash. these two classes load assets like images and videos.
+
+
+======================================
+3.05.2011
+======================================
+
+Implemented getNumChildren method of ofxFlshDisplayObjectContainer
+Added Symbols to the library. Symbols are parsed from the Document.xml in ofxFlashXFL.loadFile()

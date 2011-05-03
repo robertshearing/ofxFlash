@@ -53,6 +53,7 @@ private:
 	vector<ofxFlashLibraryItem*> imageItems;
 	vector<ofxFlashLibraryItem*> videoItems;
 	vector<ofxFlashLibraryItem*> soundItems;
+	vector<ofxFlashLibraryItem*> symbolItems;
 	vector<ofxFlashDisplayObject*> displayObjects;
 	
 public:
@@ -82,6 +83,10 @@ public:
 	ofSoundPlayer* getSoundByFileName	( string fileName );
 	ofBaseDraws* getAsset				( string assetID );
 	ofBaseDraws* getAssetByFileName		( string fileName );
+	
+	void	addSymbol	( string assetID, string assetPath );
+	string	getSymbol	( string assetID );
+	bool	hasSymbol	( string assetID );
 	
 	ofxFlashDisplayObject*	addDisplayObject	( string libraryItemName, ofxFlashDisplayObject* displayObject );
 	ofxFlashDisplayObject*	getDisplayObject	( string libraryItemName );

@@ -32,6 +32,14 @@ struct DOMBitmapItem
 	int		frameBottom;
 };
 
+
+struct SymbolItem
+{
+	string	name;
+	string	href;
+};
+
+
 class ofxFlashXFL
 {
 
@@ -52,5 +60,6 @@ public:
 private:
 	
 	void loadXFLMedia		();
+	void loadXFLSymbols		();
 	int  determineMediaType	( string fileName );
 };

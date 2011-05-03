@@ -221,6 +221,48 @@ ofBaseDraws* ofxFlashLibrary :: getAssetByFileName ( string fileName )
 	return NULL;
 }
 
+//================================================== Symbols
+
+void ofxFlashLibrary :: addSymbol ( string assetID, string path )
+{
+	ofxFlashLibraryItem* item;
+	item = new ofxFlashLibraryItem();
+	item->assetID		= assetID;
+	item->assetPath		= path;
+	item->assetType		= 0;
+	
+	symbolItems.push_back( item );
+	
+}
+
+string ofxFlashLibrary :: getSymbol ( string assetID )
+{
+	for( int i=0; i<symbolItems.size(); i++ )
+	{
+		ofxFlashLibraryItem* item = symbolItems[ i ];
+		if( item->assetID == assetID )
+		{
+			return item->assetPath;
+		}
+	}
+	return NULL;
+}
+
+bool ofxFlashLibrary :: hasSymbol ( string assetID )
+{
+	for( int i=0; i<symbolItems.size(); i++ )
+	{
+		ofxFlashLibraryItem& item = *symbolItems[ i ];
+		if( item.assetID == assetID )
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 //================================================== DISPLAY OBJECTS.
 
 ofxFlashDisplayObject* ofxFlashLibrary :: addDisplayObject ( string libraryItemName, ofxFlashDisplayObject* displayObject )

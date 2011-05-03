@@ -25,6 +25,7 @@ ofxFlashXFL :: ~ofxFlashXFL()
 
 
 vector<DOMBitmapItem>	domBitmapItems;
+vector<SymbolItem>		symbolItems;
 
 
 ///////////////////////////////////////////
@@ -58,6 +59,7 @@ bool ofxFlashXFL :: loadFile ( const string& file )
 	}
 	
 	loadXFLMedia();
+	loadXFLSymbols();
 	loadAssets();
 	
 	return bLoaded;
@@ -97,6 +99,35 @@ void ofxFlashXFL :: loadXFLMedia ()
 	xml.popTag();
 }
 
+
+void ofxFlashXFL :: loadXFLSymbols ()
+{
+	if( !xml.tagExists( "symbols", 0 ) ){
+		return;
+	}
+	xml.pushTag( "symbols", 0 );
+	
+	int numOfSymbolTags;
+	numOfSymbolTags = xml.getNumTags( "Include" );
+	for( int i=0; i<numOfSymbolTags; i++ )
+	{
+		SymbolItem item;
+		string href = xml.getAttribute( "Include", "href",	"", i );
+		item.href= 	href;
+		vector<string> elems;
+		elems = ofSplitString( href, "/" );
+		string name = elems[elems.size() - 1];
+		elems= ofSplitString( name, "." );					
+		name = elems[0];
+		item.name= 	name;		 
+		symbolItems.push_back( item );
+	}
+	
+	xml.popTag();
+}
+
+
+
 ///////////////////////////////////////////
 //	LOAD ASSETS.
 ///////////////////////////////////////////
@@ -126,6 +157,15 @@ void ofxFlashXFL :: loadAssets ()
 		{
 			library->addSound( item.name, path );
 		}
+	}
+	
+	
+	// load symbols
+	for( int i=0; i<symbolItems.size(); i++ )
+	{
+		const SymbolItem& item = symbolItems[ i ];
+		string path		= xflFolder + "LIBRARY/" + item.href;
+		library->addSymbol( item.name, path );
 	}
 }
 
